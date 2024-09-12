@@ -7,6 +7,7 @@ import {
   useEffect,
   useContext,
 } from "react";
+import React from "react";
 
 type AuthUserType = {
   id: string;
