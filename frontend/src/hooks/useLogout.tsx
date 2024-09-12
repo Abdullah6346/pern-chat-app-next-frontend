@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 const useLogout = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [loading, setLoading] = useState(false);
   const { setAuthUser, authToken } = useAuthContext();
   const logout = async () => {
     try {
       setLoading(true);
-      const res = await fetch("/api/auth/logout", {
+      const res = await fetch(`${apiUrl}/api/auth/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,7 +19,6 @@ const useLogout = () => {
 
       if (!res.ok) throw new Error(data.error);
       setAuthUser(null);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error.message);
       toast.error(error.message);

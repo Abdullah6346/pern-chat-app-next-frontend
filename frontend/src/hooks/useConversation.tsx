@@ -9,11 +9,12 @@ const useGetConversations = () => {
   const { authToken } = useAuthContext();
 
   useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const getConversations = async () => {
       try {
         setLoading(true);
         const res = await fetch(
-          "/api/messages/conversations",
+          `${apiUrl}/messages/conversations`,
           {
             method: "GET",
             headers: {

@@ -15,10 +15,11 @@ const useSignup = () => {
   const { setAuthUser, authToken } = useAuthContext();
 
   const signup = async (inputs: SignupInputs) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     try {
       setLoading(true);
       const res = await fetch(
-        "/api/auth/signup",
+        `${apiUrl}/auth/signup`,
         {
           method: "POST",
           headers: {

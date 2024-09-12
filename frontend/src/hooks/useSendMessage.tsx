@@ -2,18 +2,18 @@ import { useState } from "react";
 import useConversation from "../zustand/useConversation";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContext";
-
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
   const { messages, setMessages, selectedConversation } = useConversation();
   const { authToken } = useAuthContext();
-
+  
   const sendMessage = async (message: string) => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     if (!selectedConversation) return;
     setLoading(true);
     try {
       const res = await fetch(
-        `/api/messages/send/${selectedConversation?.id}`,
+        `${apiUrl}/messages/send/${selectedConversation?.id}`,
         {
           method: "POST",
           headers: {

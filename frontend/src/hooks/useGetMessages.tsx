@@ -8,13 +8,14 @@ const useGetMessages = () => {
     const { authToken } = useAuthContext();
 
   useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_URL;
     const getMessages = async () => {
       if (!selectedConversation) return;
       setMessages([]);
       setLoading(true);
       try {
         const res = await fetch(
-          `/api/messages/${selectedConversation?.id}`,
+          `${apiUrl}/messages/${selectedConversation?.id}`,
           {
             method: "GET",
             headers: {
